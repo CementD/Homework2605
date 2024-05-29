@@ -3,33 +3,33 @@ using namespace std;
 
 class Person {
 	string name;
+	int age;
 public:
-	Person(string name);
-	string getName() const;
+	Person(string n, int a) : name(n), age(a) {}
+
+	string getName() const {
+		return name;
+	}
+
+	int getAge() const {
+		return age;
+	}
 };
 
-Person::Person(string n) : name(n) {}
-
-string Person::getName() const { return name; }
-
-class Student {
+class Student : public Person {
 	double average;
     string numGroup;
-	Person* student;
 public:
-	Student(Person* st, double av, string ng);
-	void info() const;
+	Student(string n, int a, double av, string ng) : Person(n, a), average(av), numGroup(ng) {}
+	
+	void info() const {
+		cout << "Student info:\n";
+		cout << "Name: " << getName() << "; Age: " << getAge() << "; Average mark: " << average << "; Number of group: " << numGroup << endl;
+	}
 };
 
-Student::Student(Person* st, double av, string ng) : student(st), average(av), numGroup(ng) {}
-
-void Student::info() const {
-	cout << "Name: " << student->getName() << "\nAverage: " << average << "\nNumber of group: " << numGroup << endl;
-}
-
 int main() {
-	Person person("Semen Domin");
-	Student student(&person, 11.5, "P31");
+	Student student("Semen Domin", 16, 11.5, "P31");
 	student.info();
 	return 0;
 }
